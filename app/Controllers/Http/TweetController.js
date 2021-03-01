@@ -20,7 +20,10 @@ class TweetController {
    * @param {View} ctx.view
    */
   async index () {
-    const tweets = await Tweet.all()
+    // const tweets = await Tweet.all()
+    const tweets = await Tweet.query()
+      .with('user')
+      .fetch()
 
     return tweets
   }
@@ -67,7 +70,7 @@ class TweetController {
   async destroy ({ params, auth, response }) {
     const tweet = await Tweet.findOrFail(params.id)
 
-    if(tweet.user.id !== auth.user.id) {
+    if(tweet.user_id !== auth.user.id) {
       return response.status(401)
     }
 
