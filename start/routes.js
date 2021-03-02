@@ -43,3 +43,12 @@ Route.get('/', async ({ request, response }) => {
 Route.post('/', ({ request, response }) => {
   return response.status(201).json({body: request.all()})
 })
+
+
+Route.get('/testNumber', ({ request, view }) => {
+  const guessedNumber = Number(request.input('number'))
+  const randomNumber = Math.floor(Math.random() * 20) + 1
+
+  /** rendering view */
+  return view.render('number', { guessedNumber, randomNumber })
+})
