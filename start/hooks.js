@@ -14,4 +14,14 @@ hooks.after.providersBooted(() => {
   View.global('currentTime', function () {
     return new Date().getTime()
   })
+
+  View.global('messages', {
+    success: 'This is a success message',
+    warning: 'This is a warning message'
+  })
+
+  View.global('getMessage', function (type) {
+    const messages = this.resolve('messages')
+    return messages[type]
+  })
 })

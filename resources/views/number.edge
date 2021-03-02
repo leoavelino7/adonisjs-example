@@ -1,5 +1,6 @@
-<h1>The request URL is {{ request.url() }}</h1>
-<p>Time -  {{ currentTime() }}</p>
+<h1>APP Name: {{ appName }}</h1>
+<h3>The request URL is {{ request.url() }}</h3>
+<p>Time -  {{ currentTime() }} - Message: {{ getMessage('success') }} </p>
 @if(!guessedNumber)
   <p> Please specify a number by passing <code>?number</code> to the url </p>
 @elseif(guessedNumber === randomNumber)
