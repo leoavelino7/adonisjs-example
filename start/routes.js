@@ -3,6 +3,7 @@
 const { validate, validateAll, formatters } = use('Validator')
 
 const Database = use('Database')
+const Helpers = use('Helpers')
 
 /*
 |--------------------------------------------------------------------------
@@ -59,3 +60,15 @@ Route.get('/testNumber', ({ request, response, view }) => {
 })
 .formats(['html', 'json'])
 .prefix('api/v1')
+
+
+Route.get('/downloadFile', ({ request, response }) => {
+  const { force } = request.get()
+
+  if(force) {
+    response.attachment(Helpers.tmpPath('files/curriculo-leonardo-avelino.pdf'))
+  } else {
+    response.download(Helpers.tmpPath('files/curriculo-leonardo-avelino.pdf'))
+  }
+
+})
