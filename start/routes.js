@@ -42,7 +42,8 @@ Route.get('/', async ({ request, response }) => {
 })
 
 Route.post('/', ({ request, response }) => {
-  return response.status(201).json({body: request.all()})
+  return response.sendStatusAndJson(200, {body: request.all()})
+  // return response.status(201).json({body: request.all()})
 })
 
 
@@ -70,5 +71,4 @@ Route.get('/downloadFile', ({ request, response }) => {
   } else {
     response.download(Helpers.tmpPath('files/curriculo-leonardo-avelino.pdf'))
   }
-
 })
