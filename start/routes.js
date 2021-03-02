@@ -39,3 +39,7 @@ Route.get('/', async ({ request, response }) => {
 
   return tweet
 })
+
+Route.post('/', ({ request, response }) => {
+  return response.status(201).json({body: request.all()})
+})
