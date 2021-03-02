@@ -45,10 +45,14 @@ Route.post('/', ({ request, response }) => {
 })
 
 
-Route.get('/testNumber', ({ request, view }) => {
+Route.get('/testNumber', ({ request, response, view }) => {
   console.log(request.format());
   const guessedNumber = Number(request.input('number'))
   const randomNumber = Math.floor(Math.random() * 20) + 1
+
+  /** create cookie */
+  response.cookie('number', randomNumber)
+  response.plainCookie('numberUnsigned', randomNumber)
 
   /** rendering view */
   return view.render('number', { guessedNumber, randomNumber })
