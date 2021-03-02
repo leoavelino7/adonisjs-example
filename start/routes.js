@@ -46,9 +46,12 @@ Route.post('/', ({ request, response }) => {
 
 
 Route.get('/testNumber', ({ request, view }) => {
+  console.log(request.format());
   const guessedNumber = Number(request.input('number'))
   const randomNumber = Math.floor(Math.random() * 20) + 1
 
   /** rendering view */
   return view.render('number', { guessedNumber, randomNumber })
 })
+.formats(['html', 'json'])
+.prefix('api/v1')
