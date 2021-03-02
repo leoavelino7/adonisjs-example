@@ -38,6 +38,10 @@ class User extends Model {
   tweets() {
     return this.hasMany('App/Models/Tweet')
   }
+
+  files() {
+    return this.hasMany('App/Models/File')
+  }
 }
 
 module.exports = User

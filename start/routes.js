@@ -1,5 +1,9 @@
 'use strict'
 
+const { validate, validateAll, formatters } = use('Validator')
+
+const Database = use('Database')
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -22,4 +26,16 @@ Route.post('/authenticate', 'AuthController.authenticate')
 Route.group(() => {
   Route.get('/app', 'AppController.index').middleware(['auth'])
   Route.resource('tweets', 'TweetController').apiOnly().except(['update'])
+  Route.resource('files', 'FileController').apiOnly().only(['store'])
+  Route.resource('users', 'UserController').apiOnly().only(['index'])
 }).middleware('auth')
+
+Route.get('/', async ({ request, response }) => {
+  const tweet = Database
+    .select('content')
+    .from('tweets')
+    .where('user_id', '>=', 1)
+    .first()
+
+  return tweet
+})
