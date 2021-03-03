@@ -1,9 +1,12 @@
 'use strict'
 
+
 const { validate, validateAll, formatters } = use('Validator')
 
 const Database = use('Database')
 const Helpers = use('Helpers')
+
+const User = use('App/Models/User')
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +35,11 @@ Route.group(() => {
 
   Route.get('/', async ({ request, response, auth }) => {
     console.log(auth.user.primaryKeyValue);
+
+    const users = await User.all()
+
+    console.log(users);
+
     const tweet = Database
       .select('content')
       .from('tweets')

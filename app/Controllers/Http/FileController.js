@@ -47,7 +47,7 @@ class FileController {
    * @param {Response} ctx.response
    */
   async store ({ request, auth, response }) {
-    const user = await User.findOrFail(auth.user.id)
+    const user = await User.findOrFail(auth.user.uuid)
 
     const files = request.file('file', {
       size: '2mb'

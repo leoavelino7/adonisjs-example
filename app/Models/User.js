@@ -24,8 +24,27 @@ class User extends Model {
 
   }
 
-  static get primaryKey () {
-    return 'uuid'
+  static get dates () {
+    return super.dates.concat(['dob'])
+  }
+
+  static formatDates (field, value) {
+    if (field === 'dob') {
+      return value.format('YYYY-MM-DD')
+    }
+    return super.formatDates(field, value)
+  }
+
+  static castDates (field, value) {
+    console.log(field);
+    if (field === 'updated_at') {
+      return `${value.fromNow(true)} old`
+    }
+    return super.formatDates(field, value)
+  }
+
+  static get hidden() {
+    return ['password', 'id']
   }
 
   /**

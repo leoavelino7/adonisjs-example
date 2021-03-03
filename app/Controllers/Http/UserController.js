@@ -19,15 +19,16 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ request, response, view, auth }) {
     // const user = await User.query().where('id', 1).first()
     // await user.load('files')
 
     const user = await User
       .query()
-      .where('id', 1)
+      .where('id', auth.user.primaryKeyValue)
       .withCount('files as total_files')
-      .fetch()
+      .first()
+      // .fetch()
 
     return user
   }
