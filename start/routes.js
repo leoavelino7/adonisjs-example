@@ -31,7 +31,7 @@ Route.group(() => {
   Route.get('/app', 'AppController.index').middleware(['auth'])
   Route.resource('tweets', 'TweetController').apiOnly().except(['update'])
   Route.resource('files', 'FileController').apiOnly().only(['store'])
-  Route.resource('users', 'UserController').apiOnly().only(['index'])
+  Route.resource('users', 'UserController').apiOnly().only(['index', 'store'])
 
   Route.get('/', async ({ request, response, auth }) => {
     console.log(auth.user.primaryKeyValue);
