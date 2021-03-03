@@ -24,6 +24,10 @@ class User extends Model {
 
   }
 
+  static get computed() {
+    return ['usernameAndEmail']
+  }
+
   static get dates () {
     return super.dates.concat(['dob'])
   }
@@ -45,6 +49,10 @@ class User extends Model {
 
   static get hidden() {
     return ['password', 'id']
+  }
+
+  getUsernameAndEmail({ username, email}) {
+    return `${username} - ${email}`
   }
 
   /**

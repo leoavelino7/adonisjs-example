@@ -30,7 +30,10 @@ class UserController {
       .first()
       // .fetch()
 
-    return user
+    const userJson = user.toJSON()
+
+    console.log(userJson);
+    return userJson
   }
 }
 
