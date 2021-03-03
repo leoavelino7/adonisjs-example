@@ -3,6 +3,18 @@
 
 const { validate, validateAll, formatters } = use('Validator')
 
+const Antl = use('Antl')
+const Formats = use('Antl/Formats')
+Formats.add('usd', {
+  style: 'currency',
+  currency: 'usd'
+})
+
+Formats.add('brl', {
+  style: 'currency',
+  currency: 'brl'
+})
+
 const Database = use('Database')
 const Helpers = use('Helpers')
 
@@ -100,4 +112,25 @@ Route.get('logQuery', async ({ response }) => {
 
   console.log(total);
   return response.status(200).send('Ok')
+})
+
+
+Route.get('/hello', ({ request, response, locale }) => {
+
+  // console.log(Antl.formatNumber(10, {
+  //   style: 'currency',
+  //   currency: 'brl'
+  // })
+  // );
+
+  const message = Antl.forLocale(locale)
+    .formatMessage('message.greeting',
+      {
+        name: 'Leonardo',
+        total: 20
+      },
+      [Formats.pass('brl', 'number')]
+    )
+
+  response.send(message)
 })
