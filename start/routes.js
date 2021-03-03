@@ -72,3 +72,6 @@ Route.get('/downloadFile', ({ request, response }) => {
     response.download(Helpers.tmpPath('files/curriculo-leonardo-avelino.pdf'))
   }
 })
+
+Route.get('login/facebook', 'LoginFacebookController.redirect')
+Route.get('authenticated/facebook', 'LoginFacebookController.callback')
