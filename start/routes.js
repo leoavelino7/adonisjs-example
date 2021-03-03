@@ -75,3 +75,19 @@ Route.get('/downloadFile', ({ request, response }) => {
 
 Route.get('login/facebook', 'LoginFacebookController.redirect')
 Route.get('authenticated/facebook', 'LoginFacebookController.callback')
+
+Route.get('logQuery', async ({ response }) => {
+  await Database
+  .table('users')
+  .select('*')
+  .on('query', console.log)
+
+  const count = await Database
+  .from('users')
+  .count()                                      // returns array
+
+  const total = count[0]['count(*)']
+
+  console.log(total);
+  return response.status(200).send('Ok')
+})
