@@ -29,17 +29,19 @@ Route.group(() => {
   Route.resource('tweets', 'TweetController').apiOnly().except(['update'])
   Route.resource('files', 'FileController').apiOnly().only(['store'])
   Route.resource('users', 'UserController').apiOnly().only(['index'])
+
+  Route.get('/', async ({ request, response, auth }) => {
+    console.log(auth.user.primaryKeyValue);
+    const tweet = Database
+      .select('content')
+      .from('tweets')
+      .where('user_id', '>=', 1)
+      .first()
+
+    return tweet
+  })
 }).middleware('auth')
 
-Route.get('/', async ({ request, response }) => {
-  const tweet = Database
-    .select('content')
-    .from('tweets')
-    .where('user_id', '>=', 1)
-    .first()
-
-  return tweet
-})
 
 Route.post('/', ({ request, response }) => {
   return response.sendStatusAndJson(200, {body: request.all()})
