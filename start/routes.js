@@ -134,3 +134,8 @@ Route.get('/hello', ({ request, response, locale }) => {
 
   response.send(message)
 })
+
+
+Route.get('/chat', ({ view }) => {
+  return view.render('chat')
+})
